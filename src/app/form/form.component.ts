@@ -6,7 +6,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 declare var window: any; ////bts
-
+declare let Email: any;
+declare let emailjs: any;
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -44,7 +45,6 @@ export class FormComponent implements OnInit {
       submission: new FormControl('', [Validators.required]),
     });
   }
-
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
       document.getElementById('exampleModal') ////bts
@@ -54,6 +54,7 @@ export class FormComponent implements OnInit {
   formModal: any;
   openmodal() {
     this.formModal.show();
+    //this.registerForm.reset();
   }
   // ****************   bts   *********
 
@@ -99,7 +100,36 @@ export class FormComponent implements OnInit {
   get Submission(): FormControl {
     return this.registerForm.get('submission') as FormControl;
   }
+  // registerUser() {
+  //   Email.send({
+  //      SecureToken: '3de0b7f1-d8e9-4a17-879f-bbbdcee96396',
+  //     Host: 'smtp.gmail.com',
+  //     Username: 'badhanurvashi99@gmail.com',
+  //     Password: 'lpubjmzoxduzxetg',
+  //      kjwrajfzmimrjbor -- STMP
+  //      lpubjmzoxduzxetg ---smtp
+  //      0BE19A82B31C1FA7520B24F9FD2FFACECC6C
+  //     To: 'urvashihsp@gmail.com',
+  //     this.registerForm.value.notification
+  //     From: 'badhanurvashi99@gmail.com',
+  //     Subject: 'This is an enquiry contact form.',
+  //     Body: 'helloo i am user',
+
+  //   }).then((message: any) => alert(message));
+  //   console.log(this.registerForm.value.notification);
+  //    localStorage.setItem('username', this.registerForm.value.chair);
+  // }
+
   registerUser() {
-    this.registerForm.reset();
+    var param = {
+      from_name: 'Urvashi',
+      email_id: this.registerForm.value.notification,
+      message: 'hello,this is test mail.',
+    };
+    emailjs
+      .send('service_nstrl3h', 'template_pngfe42', param)
+      .then(function (res: { status: string }) {
+        alert('success' + res.status);
+      });
   }
 }
