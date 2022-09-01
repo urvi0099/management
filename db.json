@@ -6,11 +6,10 @@
       "author": "typicode"
     }
   ],
-  "comments": [
+  "loginuser": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "username":"admin",
+      "password":"admin@321"
     }
   ],
   "profile": {
